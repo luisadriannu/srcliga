@@ -1,0 +1,24 @@
+<section>
+
+    <div class="contH">
+    <h3>Liga deportiva Huetamo</h3>
+    <h4>Iniciar sesion</h4>
+<img class="logo" src="assets/imagenes/deportes_icon.png" alt="Deportes"
+width="150px" height="150px">
+</div>
+
+    <div class="input-cont">
+        <div class="input">
+    <input type="text" required  [(ngModel)]="Email">
+    <label for="">Correo</label>
+        </div>
+    </div>  
+
+    <div class="input-cont2">
+            <div class="input2">
+        <input type="password" required  [(ngModel)]="Pwd">
+        <label for="">Contraseña</label>
+            </div>
+    </div>  
+    <button class="login" (click)="iniciarSesion()">Entrar</button>
+</section>

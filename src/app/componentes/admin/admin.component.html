@@ -1,0 +1,759 @@
+<div class="contenedor">
+    <header>
+        <mat-tab-group mat-align-tabs="start" style="width: 100%; padding: 5px;">
+            <mat-tab label="Jugadores" style="width: 100%;">
+                <div class="sub-contenedor">
+                    <form action="formularios">
+                        <div class="tittleForm">
+                            <label for="">
+                                <span *ngIf="!isEditaJugador">Agregar</span>
+                                <span *ngIf="isEditaJugador">Editar</span>
+                                Jugador</label>
+                        </div>
+                        <div class="subForm row">
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" minlength="4" maxlength="25" id="floatingInput" placeholder="Nombre" [(ngModel)]="dtojugador.nombre" name="nombreJugador"
+                                 #nombreJugador="ngModel" required [ngClass]="{'is-invalid': nombreJugador.errors && nombreJugador.touched}" pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+                                <div [hidden]="!nombreJugador.errors?.['required']" class="invalid-feedback">
+                                    Nombre requerido
+                                </div>
+                                <div [hidden]="!nombreJugador.errors?.['pattern']" class="invalid-feedback">
+                                    Nombre invalido
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" id="floatingInput" minlength="4" maxlength="25" placeholder="Apellido Paterno" [(ngModel)]="dtojugador.apellidoP" name="apellidoPJugador"
+                                #apellidoPJugador="ngModel" required [ngClass]="{'is-invalid' : apellidoPJugador.errors && apellidoPJugador.touched}" pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+                                <div [hidden]="!apellidoPJugador.errors" class="invalid-feedback">
+                                    Apellido requerido
+
+                                </div>
+                                <div [hidden]="!apellidoPJugador.errors?.['pattern']" class="invalid-feedback">
+                                    Nombre invalido
+                                </div>
+
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" id="floatingInput" minlength="4" maxlength="25" placeholder="Apellido Materno"[(ngModel)]="dtojugador.apellidoM" name="apellidoMJugador"
+                                #apellidoMJugador="ngModel" required [ngClass]="{'is-invalid' : apellidoMJugador.errors && apellidoMJugador.touched}"pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+                                <div [hidden]="!apellidoMJugador.errors" class="invalid-feedback">
+                                    Apellido requerido
+
+                                </div>
+                                <div [hidden]="!apellidoMJugador.errors?.['pattern']" class="invalid-feedback">
+                                    Nombre invalido
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="number" id="floatingInput" minlength="1" maxlength="2" placeholder="Edad" min="12" max="60" [(ngModel)]="dtojugador.edad" name="edadJugador" #edadJugador="ngModel"
+                                [required]="true" [ngClass]="{'is-invalid': edadJugador.errors && edadJugador.touched}"
+                                >
+                                <div [hidden]="!edadJugador.errors?.['required']" class="invalid-feedback">
+                                    Edad requerida
+                                </div>
+                                <div [hidden]="!edadJugador.errors?.['min']" class="invalid-feedback">
+                                    no debe ser menor a 12
+                                </div>
+                                <div [hidden]="!edadJugador.errors?.['max']" class="invalid-feedback">
+                                    no debe ser mayor a 60
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" id="floatingInput" placeholder="Numero de seguro" minlength="11" maxlength="11" [(ngModel)]="dtojugador.imss" name="imssJugador"
+                                #imssJugador="ngModel" required [ngClass]="{'is-invalid' : imssJugador.errors && imssJugador.touched}" pattern="^[0-9]{11}">
+                                <div [hidden]="!imssJugador.errors?.['required']" class="invalid-feedback">
+                                    Numero social requerido
+                                </div>
+                                <div [hidden]="!imssJugador.errors?.['pattern']" class="invalid-feedback">
+                                    Numero social invalido
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="tel" id="floatingInput" placeholder="Telefono"  [(ngModel)]="dtojugador.telefono" name="telefonoJugador"
+                                #telefonoJugador = "ngModel"  minlength="10" maxlength="10" required [ngClass]="{'is-invalid': telefonoJugador.errors &&  (telefonoJugador.dirty || telefonoJugador.touched)}"
+                                pattern="^[0-9]{11}">
+                                <div *ngIf="!telefonoJugador.errors?.['required']" class="invalid-feedback">
+                                    numero de telefono requerido
+                                </div>
+                                
+                                <div [hidden]="!telefonoJugador.errors?.['pattern']" class="invalid-feedback">
+                                    Numero telefonico invalido
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col-12">
+                                <div class="file-field input-field">
+                                    <div class="btn">
+                                        <span>Foto de jugador</span>
+                                        <input type="file" (change)="cargaImgJugador($event)">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="mb-3 col-12" *ngIf="isvisibleIMgJ" style="width: 20%;">
+                                <img src="{{imgJugador}}" alt="{{imgJugador}}">
+                               <h6>Vista previa</h6>
+                            </div>
+                            <div class="form-floating mb-3 col-12">
+                                <select class="browser-default" [(ngModel)]="dtojugador.genero" name="generoJugador" #generoJugador="ngModel"
+                                required [ngClass]="{'is-invalid': generoJugador.errors && generoJugador.touched}"
+                                >
+                                    <option value="M">Mujer</option>
+                                    <option value="H">Hombre</option>
+
+                                </select>
+                                <div *ngIf="!generoJugador.errors" class="invalid-feedback" >
+                                    Genero requerido
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <label for="" *ngIf="Equipos.length ==0">No hay equipos Registrados</label>
+                                <select class="browser-default" *ngIf="Equipos.length >0" [(ngModel)]="dtojugador.equipo" name="equipoJugador1" #equipoJugador1="ngModel"
+                                    required [ngClass]="{'is-invalid': equipoJugador1.errors && equipoJugador1.touched}"
+                                    >
+
+                                    <option value="{{equipo.nombre}}" *ngFor="let equipo of Equipos">{{equipo.nombre}} / {{equipo.liga}}</option>
+
+                                </select>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="number" id="floatingInput" minlength="1" maxlength="2" placeholder="Numero de camiseta" min="1"
+                                    max="999" [(ngModel)]="dtojugador.numeroCamisa" name="numeroCamisaJugador" #numeroCamisaJugador="ngModel"
+                                    required [ngClass]="{'is-invalid':numeroCamisaJugador.errors && numeroCamisaJugador.touched}"
+                                    pattern="^[0-9]{11}">
+                                    <div class="invalid-feedback" *ngIf="numeroCamisaJugador.errors?.['required']">
+                                            NUmero de camiseta requerida
+                                    </div>
+                                    <div class="invalid-feedback" *ngIf="numeroCamisaJugador.errors?.['min']">
+                                       Numero de camisa no debe ser menor a 1
+                                </div>
+                                <div class="invalid-feedback" *ngIf="numeroCamisaJugador.errors?.['max']">
+                                    Numero de camisa no debe ser mayor a 999
+                             </div>
+                             <div [hidden]="!numeroCamisaJugador.errors?.['pattern']" class="invalid-feedback">
+                                Numero de camiseta invalido
+                            </div>
+                            </div>
+
+                            <div class="form-floating mb-3 col-6">
+                                <button class="btn waves-effect waves-light" type="submit" name="action"
+                                    *ngIf="!isEditaJugador" (click)="registraJugador()" [disabled]="nombreJugador.errors || apellidoPJugador.errors || apellidoMJugador.errors || edadJugador.errors || imssJugador.errors || telefonoJugador.errors || generoJugador.errors || numeroCamisaJugador">Agregar
+                                </button>
+                                <button class="btn waves-effect green accent-3" type="submit" name="action"
+                                    *ngIf="isEditaJugador" (click)="ActualizaJugador()">Actualizar
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div class="hrV"></div>
+                    <div class="tablas">
+                        <label for="">Jugadores registrados</label>
+                        <div>
+                                <div>
+                                    <mat-form-field appearance="standard">
+                                        <mat-label>Filter</mat-label>
+                                        <input matInput (keyup)="applyFilterJugador($event)" placeholder="Busca Jugadores" #input>
+                                      </mat-form-field>
+                                      
+                                      <div class="mat-elevation-z8">
+                                        <table mat-table [dataSource]="dataSourceJugadores" matSort>
+                                      
+                                          <!-- ID Column -->
+                                          <ng-container matColumnDef="nombre">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                                            <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+                                          </ng-container>
+                                      
+                                          <!-- Progress Column -->
+                                          <ng-container matColumnDef="img">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> foto </th>
+                                            <td mat-cell *matCellDef="let row">
+                                                <img src="{{row.img}}" alt=" {{row.img}}" width="30%">
+                                            </td>
+                                          </ng-container>
+                                      
+                                          <!-- Name Column -->
+                                          <ng-container matColumnDef="equipo">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Equipo </th>
+                                            <td mat-cell *matCellDef="let row"> {{row.equipo}} </td>
+                                          </ng-container>
+                                      
+                                          <!-- Fruit Column -->
+                                          <ng-container matColumnDef="imss">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Imss </th>
+                                            <td mat-cell *matCellDef="let row"> {{row.imss}} </td>
+                                          </ng-container>
+
+                                          <ng-container matColumnDef="numeroC">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Numero </th>
+                                            <td mat-cell *matCellDef="let row"> {{row.numeroCamisa}} </td>
+                                          </ng-container>
+
+                                          <ng-container matColumnDef="genero">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Genero </th>
+                                            <td mat-cell *matCellDef="let row"> {{row.genero}} </td>
+                                          </ng-container>
+
+                                          <ng-container matColumnDef="opciones">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Opciones </th>
+                                            <td mat-cell *matCellDef="let row"> 
+                                                <a class="waves-effect waves-light btn" (click)="editaJugador(row)"><i class="fa-solid fa-pen-to-square"></i></a>    
+                                            </td>
+                                            
+                                          </ng-container>
+
+                                          <tr mat-header-row *matHeaderRowDef="columsjugador"></tr>
+                                          <tr mat-row *matRowDef="let row; columns: columsjugador;"></tr>
+                                      
+                                          <!-- Row shown when there is no matching data. -->
+                                          <tr class="mat-row" *matNoDataRow>
+                                            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                                          </tr>
+                                        </table>
+                                      
+                                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users" #MatPaginatorJugador></mat-paginator>
+                                      </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Ligas">
+                <div class="sub-contenedor">
+                    <form action="formularios">
+                        <div class="tittleForm">
+                            <label for="">
+                                <span *ngIf="!isEditaJugador">Agregar</span>
+                                <span *ngIf="isEditaJugador">Editar</span>
+                                Liga</label>
+                        </div>
+                        <div class="subForm row">
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" id="floatingInput" minlength="4" maxlength="25" placeholder="Nombre" [(ngModel)]="datosLiga.nombre" name="nombreLiga"
+                                #nombreLiga="ngModel" required [ngClass]="{'is-invalid': nombreLiga.errors && nombreLiga.touched}"pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" >
+                                <div [hidden]="!nombreLiga.errors" class="invalid-feedback">
+                                    Nombre requerido
+                                </div>
+                                <div [hidden]="!nombreLiga.errors?.['pattern']" class="invalid-feedback">
+                                    Nombre invalido
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                               
+                                <select class="browser-default"  [(ngModel)]="datosLiga.deporte" name="deporteLiga">
+                                    <option value="Futbol" selected>Futbol</option>
+                                    <option value="Basquetbol">Basquetbol</option>
+                                    <option value="Volley">Volley</option>
+                                </select>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" id="floatingInput" minlength="4" maxlength="25" placeholder="Encargado"  [(ngModel)]="datosLiga.encargado" name="encargadoLiga"
+                                #encargadoLiga="ngModel" required [ngClass]="{'is-invalid': encargadoLiga.errors && encargadoLiga.touched}"pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" >
+                                <div [hidden]="!encargadoLiga.errors" class="invalid-feedback">
+                                    Nombre requerido
+                                </div>
+                                <div [hidden]="!nombreJugador.errors?.['pattern']" class="invalid-feedback">
+                                    Nombre invalido
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                
+                                <select class="browser-default"  [(ngModel)]="datosLiga.genero" name="generoLiga">
+                                    <option value="M">Mujer</option>
+                                    <option value="H">Hombre</option>
+
+                                </select>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                
+                                <select class="browser-default"  [(ngModel)]="datosLiga.isactiva" name="activa">
+                                    <option value=false>Activa</option>
+                                    <option value=true>Inactiva</option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-floating mb-3 col-6">
+                                <select class="browser-default"  [(ngModel)]="datosLiga.categoria" name="liga">
+                                    <option value="Primera">Primera</option>
+                                    <option value="Segunda">Segunda</option>
+                                    <option value="Master">Master</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-floating mb-3 col-6">
+                                <button class="btn waves-effect waves-light" type="submit" name="action"
+                                    *ngIf="!isEditaJugador" [disabled]="loader" (click)="registraLIga()">
+                                    <label for="" *ngIf="!loader" class="text-white">Guardar</label>
+                                    <label for="" *ngIf="loader">Guardando...</label>
+                                </button>
+                                <button class="btn waves-effect green accent-3" type="submit" name="action"
+                                    *ngIf="isEditaJugador" (click)="actualizaLiga()">Actualizar
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div class="hrV"></div>
+                    <div class="tablas">
+                        <label for="">Ligas registrados</label>
+                        <div>
+                            <div>
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Filter</mat-label>
+                                    <input matInput (keyup)="applyFilter($event)" placeholder="Buscar Liga" #input>
+                                  </mat-form-field>
+                                  
+                                  <div class="mat-elevation-z8">
+                                    <table mat-table [dataSource]="dataSourceLIga" matSort>
+                                  
+                                      <!-- ID Column -->
+                                      <ng-container matColumnDef="Nombre">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+                                      </ng-container>
+                                  
+                                      <!-- Progress Column -->
+                                      <ng-container matColumnDef="Deporte">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Deporte </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.deporte}}</td>
+                                      </ng-container>
+                                  
+                                      <!-- Name Column -->
+                                      <ng-container matColumnDef="Encargado">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Encargado </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.encargado}} </td>
+                                      </ng-container>
+                                  
+                                      <!-- Fruit Column -->
+                                      <ng-container matColumnDef="Categoria">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.categoria}} </td>
+                                      </ng-container>
+    
+                                      <ng-container matColumnDef="Genero">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Genero </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.genero}} </td>
+                                      </ng-container>
+                                      <ng-container matColumnDef="Opciones">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Opciones </th>
+                                        <td mat-cell *matCellDef="let row"> 
+                                            <a class="waves-effect waves-light btn" (click)="editaLIga(row)"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        </td>
+                                      </ng-container>
+                                  
+                                      <tr mat-header-row *matHeaderRowDef="columsLiga"></tr>
+                                      <tr mat-row *matRowDef="let row; columns: columsLiga;"></tr>
+                                  
+                                      <!-- Row shown when there is no matching data. -->
+                                      <tr class="mat-row" *matNoDataRow>
+                                        <td class="mat-cell" colspan="4">No se encontraron datos para "{{input.value}}"</td>
+                                      </tr>
+                                    </table>
+                                  
+                                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users" #MatPaginatorLigas ></mat-paginator>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Equipos">
+                <div class="sub-contenedor">
+                    <form action="formularios">
+                        <div class="tittleForm">
+                            <label for="">
+                                <span *ngIf="!isEditaJugador">Agregar</span>
+                                <span *ngIf="isEditaJugador">Editar</span>
+                                Equipos</label>
+                        </div>
+                        <div class="subForm row">
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" id="floatingInput" minlength="4" maxlength="25" placeholder="Nombre" [(ngModel)]="dtoequipo.nombre" name="nombreequipo"
+                                #nombreequipo="ngModel" required [ngClass]="{'is-invalid': nombreequipo.errors && nombreequipo.touched}"pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+                                <div [hidden]="!nombreequipo.errors" class="invalid-feedback">
+                                    Nombre requerido
+                                </div>
+                                <div [hidden]="!nombreequipo.errors?.['pattern']" class="invalid-feedback">
+                                    Nombre invalido
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" id="floatingInput" minlength="4" maxlength="25" placeholder="Representante" [(ngModel)]="dtoequipo.representante" name="representanteEuipo"
+                                #representanteeuipo="ngModel" required [ngClass]="{'is-invalid': representanteeuipo.errors && representanteeuipo.touched}"pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+                                <div [hidden]="!representanteeuipo.errors" class="invalid-feedback">
+                                    Representante  requerido
+                                </div>
+                                <div [hidden]="!representanteeuipo.errors?.['pattern']" class="invalid-feedback">
+                                    Nombre invalido
+                                </div>
+                            </div>
+                           
+                            <div class="form-floating mb-3 col-12">
+                                <div class="file-field input-field">
+                                    <div class="btn">
+                                        <span>Foto de Equipo</span>
+                                        <input type="file" (change)="cargaImgequipo($event)" accept="image/*">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text" >
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-floating mb-3 col-12" *ngIf="isvisibleIMg">
+                                <img src="{{img}}" alt="" width="20%">
+                                <h6>Vista Previa</h6>
+                            </div>
+                            <div class="form-floating mb-3 col-12">
+                                <label for="" *ngIf="ligas.length ==0">Sin ligas registradas</label>
+                                <select class="browser-default" *ngIf="ligas.length >0" [(ngModel)]="dtoequipo.liga" name="idliga">
+                                    <option value="{{liga.id}}" *ngFor="let liga of ligas">{{liga.id}}</option>    
+                                </select>
+                            </div>
+                           
+
+                            <div class="form-floating mb-3 col-6">
+                                <button class="btn waves-effect waves-light" type="submit" name="action" [disabled]="ligas.length ==0"
+                                    *ngIf="!isEditaEquipo" (click)="registraEquipo()">Agregar
+                                </button>
+                                <button class="btn waves-effect green accent-3" type="submit" name="action"
+                                    *ngIf="isEditaEquipo" (click)="actualizaEquipo()">Actualizar
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div class="hrV"></div>
+                    <div class="tablas">
+                        <label for="">Equipos registrados</label>
+                        <div>
+                            <mat-form-field appearance="standard">
+                                <mat-label>Filter</mat-label>
+                                <input matInput (keyup)="applyFilterEquipos($event)" placeholder="Buscar equipos" #inputE>
+                              </mat-form-field>
+                              
+                              <div class="mat-elevation-z8">
+                                <table mat-table [dataSource]="dataSourceEquipos" matSort>
+                              
+                                  <!-- ID Column -->
+                                  <ng-container matColumnDef="nombre">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+                                  </ng-container>
+                              
+                                  <!-- Progress Column -->
+                                  <ng-container matColumnDef="img">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Imagen </th>
+                                    <td mat-cell *matCellDef="let row">
+                                    <img src="{{row.img}}" alt="{{row.nombre}}" width="20%">    
+                                    </td>
+                                  </ng-container>
+                              
+                                  <!-- Name Column -->
+                                  <ng-container matColumnDef="liga">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Liga </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.liga}} </td>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="Representante">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Representante </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.representante}} </td>
+                                  </ng-container>
+                              
+                                  <!-- Fruit Column -->
+                                  <ng-container matColumnDef="opciones">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Opciones </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <a class="waves-effect waves-light btn" (click)="editaEquipo(row)"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    </td>
+                                  </ng-container>
+                              
+                                  <tr mat-header-row *matHeaderRowDef="columsEquipos"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: columsEquipos;"></tr>
+                              
+                                  <!-- Row shown when there is no matching data. -->
+                                  <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell" colspan="4">No data matching the filter "{{inputE.value}}"</td>
+                                  </tr>
+                                </table>
+                              
+                                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users" #MatPaginatorequipos></mat-paginator>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Árbitros" style="width: 100%;">
+                <div class="sub-contenedor">
+                    <form action="formularios">
+                        <div class="tittleForm">
+                            <label for="">
+                                <span *ngIf="!isEditaJugador">Agregar</span>
+                                <span *ngIf="isEditaJugador">Editar</span>
+                                Árbitro</label>
+                        </div>
+                        <div class="subForm row">
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" id="floatingInput" minlength="4" maxlength="25" placeholder="Nombre" [(ngModel)]="dtoalbitro.nombre" name="nombreAlbitro"
+                                #nombreAlbitro="ngModel" required [ngClass]="{'is-invalid': nombreAlbitro.errors && nombreAlbitro.touched}"pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+                                <div [hidden]="!nombreAlbitro.errors" class="invalid-feedback">
+                                    Nombre requerido
+                                </div>
+                                <div [hidden]="!nombreAlbitro.errors?.['pattern']" class="invalid-feedback">
+                                    Nombre invalido
+                                </div>
+
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" id="floatingInput" minlength="4" maxlength="15" placeholder="Apellido Paterno"  [(ngModel)]="dtoalbitro.apellidoP" name="ApellidoPAlbitro"
+                                #ApellidoPAlbitro="ngModel" required [ngClass]="{'is-invalid': ApellidoPAlbitro.errors && ApellidoPAlbitro.touched}"pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+                                <div [hidden]="!ApellidoPAlbitro.errors" class="invalid-feedback">
+                                    Apellido requerido
+                                </div>
+                                <div [hidden]="!ApellidoPAlbitro.errors?.['pattern']" class="invalid-feedback">
+                                    Nombre invalido
+                                </div>
+
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" id="floatingInput" minlength="4" maxlength="15" placeholder="Apellido Materno"  [(ngModel)]="dtoalbitro.apellidoM" name="apellidoMAlbitro"
+                                #apellidoMAlbitro="ngModel" required [ngClass]="{'is-invalid': apellidoMAlbitro.errors && apellidoMAlbitro.touched}"pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+                                <div [hidden]="!apellidoMAlbitro.errors" class="invalid-feedback">
+                                    Apellido requerido
+                                </div>
+                                <div [hidden]="!apellidoMAlbitro.errors?.['pattern']" class="invalid-feedback">
+                                    Nombre invalido
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="number" id="floatingInput" placeholder="Edad" min="18" max="60"  [(ngModel)]="dtoalbitro.edad" name="edadAlbitro"
+                                #edadAlbitro="ngModel" required [ngClass]="{'is-invalid': edadAlbitro.errors && edadAlbitro.touched}">
+                                <div [hidden]="!edadAlbitro.errors" class="invalid-feedback"pattern="^[0-9]{11}">
+                                    Edad requerida
+                                </div>
+                                <div [hidden]="!edadAlbitro.errors?.['pattern']" class="invalid-feedback">
+                                    edad invalido
+                                </div>
+                                
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="text" id="floatingInput" placeholder="Imss" minlength="11" maxlength="11"  [(ngModel)]="dtoalbitro.imss" name="imssAlbitro"
+                                #imssAlbitro="ngModel" required [ngClass]="{'is-invalid': imssAlbitro.errors && imssAlbitro.touched}">
+                                <div [hidden]="!imssAlbitro.errors" class="invalid-feedback"pattern="^[0-9]{11}">
+                                    Numero social requerido
+                                </div>
+                                <div [hidden]="!imssAlbitro.errors?.['pattern']" class="invalid-feedback">
+                                    Numero social invalido
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col-6">
+                                <input type="tel" id="floatingInput" minlength="10" maxlength="10" placeholder="Telefono" min="10" max="10"  [(ngModel)]="dtoalbitro.telefono" name="telefonoAlbitro"
+                                #telefonoAlbitro="ngModel" required [ngClass]="{'is-invalid': telefonoAlbitro.errors && telefonoAlbitro.touched}">
+                                <div [hidden]="!telefonoAlbitro.errors" class="invalid-feedback"pattern="^[0-9]{11}">
+                                    Telefono requerido
+                                </div>
+                                <div [hidden]="!telefonoAlbitro.errors?.['pattern']" class="invalid-feedback">
+                                    Numero Telefonico invalido
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3 col-6">
+                                <select class="browser-default"  [(ngModel)]="dtoalbitro.genero" name="generoAlbitro">
+                                    <option value="M">Mujer</option>
+                                    <option value="H">Hombre</option>
+
+                                </select>
+                            </div>                            
+
+                            <div class="form-floating mb-3 col-12">
+                                <div class="file-field input-field">
+                                    <div class="btn">
+                                        <span>Foto de Árbitro</span>
+                                        <input type="file" (change)="cargaImgAlbitro($event)">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-floating mb-3 col-12" *ngIf="muestraImgAlbitro">
+                                <img src="{{imgAlbitro}}" alt="{{imgAlbitro}}" width="30%">
+                               <h6>Vista previa</h6>
+
+                            </div>
+                            
+                            <div class="form-floating mb-3 col-6">
+                                <label for="" *ngIf="Equipos.length ==0">No hay equipos Registrados</label>
+                                <select class="browser-default" *ngIf="Equipos.length >0" [(ngModel)]="dtoalbitro.equipo" name="equipoAlbitro">
+
+                                    <option value="{{equipo.id}}" *ngFor="let equipo of ligas">{{equipo.id}}</option>
+
+                                </select>
+                            </div>
+                           
+
+                            <div class="form-floating mb-3 col-6">
+                                <button class="btn waves-effect waves-light" type="submit" name="action"
+                                    *ngIf="!isEditaAlbitro" (click)="registraAlbitro()">Agregar
+                                </button>
+                                <button class="btn waves-effect green accent-3" type="submit" name="action"
+                                    *ngIf="isEditaAlbitro" (click)=" ActualizaAlbitro()">Actualizar
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div class="hrV"></div>
+                    <div class="tablas">
+                        <label for="">Árbitros registrados</label>
+                        <div>
+                            <div>
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Filter</mat-label>
+                                    <input matInput (keyup)="applyFilterAlbitro($event)" placeholder="Busca árbitro" #inputAlbitro>
+                                  </mat-form-field>
+                                  
+                                  <div class="mat-elevation-z8">
+                                    <table mat-table [dataSource]="dataSourceAlbitros" matSort>
+                                  
+                                      <!-- ID Column -->
+                                      <ng-container matColumnDef="nombre">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+                                      </ng-container>
+                                  
+                                      <!-- Progress Column -->
+                                      <ng-container matColumnDef="img">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Foto </th>
+                                        <td mat-cell *matCellDef="let row"> 
+                                            <img src="{{row.img}} " alt="{{row.img}}" width="25%">
+                                        </td>
+                                      </ng-container>
+                                  
+                                      <!-- Name Column -->
+                                      <ng-container matColumnDef="equipo">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Liga </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.equipo}} </td>
+                                      </ng-container>
+                                  
+                                      <!-- Fruit Column -->
+                                      <ng-container matColumnDef="imss">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Imss </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.imss}} </td>
+                                      </ng-container>
+
+                                      <ng-container matColumnDef="genero">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Genero </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.genero}} </td>
+                                      </ng-container>
+                                  
+                                      <ng-container matColumnDef="opciones">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> opciones </th>
+                                        <td mat-cell *matCellDef="let row"> 
+                                            <a class="waves-effect waves-light btn"(click)="editaAlbitro(row)" ><i class="fa-solid fa-pen-to-square"></i></a>    
+                                        </td>
+                                      </ng-container>
+                                      <tr mat-header-row *matHeaderRowDef="columsAlbitro"></tr>
+                                      <tr mat-row *matRowDef="let row; columns: columsAlbitro;"></tr>
+                                  
+                                      <!-- Row shown when there is no matching data. -->
+                                      <tr class="mat-row" *matNoDataRow>
+                                        <td class="mat-cell" colspan="4">No data matching the filter "{{inputAlbitro.value}}"</td>
+                                      </tr>
+                                    </table>
+                                  
+                                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users" #MatPaginatorAlbitro></mat-paginator>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+
+
+            
+            <mat-tab label="Partidos">
+                    <div class="contanedorCalendario">
+                        <div class="formPArtido">
+                        <h2>Agregar Partido</h2>
+                        <a class="waves-effect waves-light btn"><i class="fa-solid fa-futbol" (click)="abreORcloseModal()"></i></a>
+                        <div class="modalContenedor">
+                            <div class="sub-contenedorPartidos">
+                                <button (click)="abreORcloseModal()">X</button>
+                                <form action="" class="formPartido">
+                                        <h1>Agregar Partido</h1>
+                                    <div class="form-floating mb-3 col-6">
+                                        <select class="browser-default" (change)="BuscaLiga($event)" [(ngModel)]="dtoPartido.deporte" name="deportePartido">
+                                            <option value="Futbol" selected>Futbol</option>
+                                            <option value="Basquetbol">Basquetbol</option>
+                                            <option value="Volley">Volley</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-floating mb-3 col-6">
+                                        <label for="" *ngIf="selectLIga.length == 0">
+                                            no hay nada registrado en este apartado
+                                        </label>
+                                        <select class="browser-default" (change)="BuscaEquipo($event)" *ngIf="selectLIga.length > 0" [(ngModel)]="dtoPartido.liga" name="ligaDelPartido">
+                                            <option value="1">Selecciona una liga</option>
+                                            <option value="{{liga.id}}" selected *ngFor="let liga of selectLIga">{{liga.id}}</option> 
+                                        </select>
+                                    </div>
+                                   
+                                    <div class="form-floating mb-3 col-6">
+                                        <label for="" *ngIf="selectAlbitros.length == 0 && selectLIga.length == 0">
+                                            no hay nada registrado en este apartado
+                                        </label>
+                                        <select class="browser-default"  *ngIf="selectAlbitros.length > 0 && selectLIga.length > 0"  [(ngModel)]="dtoPartido.albitro" name="albitroPartido">
+                                            <option value="1"  >Selecciona un Albitro</option>
+                                            <option value="{{albitro.nombre}} {{albitro.apellidoP}}" selected  *ngFor="let albitro of selectAlbitros" >{{albitro.nombre}} {{albitro.apellidoP}}</option>
+                                            
+                                        </select>
+                                    </div>
+                                    <div class="form-floating mb-3 col-3">
+                                        <label for="" *ngIf="selectEquipos.length == 0 && selectLIga.length == 0">
+                                            no hay nada registrado en este apartado
+                                        </label>
+                                        <select class="browser-default" *ngIf="selectEquipos.length > 0 && selectLIga.length > 0"  (change)="cargaP2($event)" [(ngModel)]="dtoPartido.equipo1" name="equipo1Partido">
+                                            <option value="1"  selected disabled>Selecciona un equipo</option>
+                                            <option value="{{equipos.nombre}}"  *ngFor="let equipos of selectEquipos" [disabled]="disables1P == equipos.nombre" >{{equipos.nombre}}</option>
+                                            
+                                        </select>
+                                    </div>
+                                    <h4 *ngIf="selectLIga.length > 0">VS</h4>
+                                    <div class="form-floating mb-3 col-3">
+                                        <label for="" *ngIf="selectEquipos.length == 0 && selectLIga.length == 0">
+                                            no hay nada registrado en este apartado
+                                        </label>
+                                        <select class="browser-default" *ngIf="selectEquipos.length > 0 && selectLIga.length > 0"  (change)="cargaP1($event)" [(ngModel)]="dtoPartido.equipo2" name="equipo2Partido">
+                                            <option value="1" >Selecciona un equipo</option>
+                                            <option value="{{equipos.nombre}}"  *ngFor="let equipos of selectEquipos" [disabled]="disables2P == equipos.nombre"  >{{equipos.nombre}}</option>
+                                            
+                                        </select>
+                                    </div>
+                                    <div class="form-floating mb-3 col-3">
+                                        <input type="text" id="floatingInput" placeholder="Lugar del partido" [(ngModel)]="dtoPartido.lugar" name="lugarPartido">
+                                    </div>
+                                    <div class="form-floating mb-3 col-3">
+                                        <input type="datetime-local" id="floatingInput" placeholder="fecha" [(ngModel)]="dtoPartido.fecha" name="fechaPartido">
+                                    </div>
+                                    <div class="form-floating mb-3 col-3">
+                                        <a class="waves-effect waves-light btn" (click)="registraPartido()">Guardar</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+                        <app-calendario></app-calendario>
+                    </div>
+            </mat-tab>
+        </mat-tab-group>
+    </header>
+
+</div>

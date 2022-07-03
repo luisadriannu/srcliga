@@ -1,0 +1,146 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+
+header{
+    text-align: center;
+    margin: 2px;
+}
+
+header h4{
+ margin: 15px;   
+}
+  
+.contH{
+    text-align: center;
+}
+.contH h3{
+    font-weight: bolder;
+    font-size: 35px;
+}
+
+.contH h4{
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+
+section{
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 55vh;
+   
+}
+
+
+
+.input-cont{
+    width: 450px;
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+}
+
+.input{
+    width: 100%;
+    height: 40px;
+    position: relative;
+}
+
+.input input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid silver;
+    font-size: 18px;
+}
+
+.input label{
+    position: absolute;
+    left: 0%;
+    bottom: 10px;
+    color: silver;
+    font-size: 18px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input input :focus ~label,
+.input input:valid ~label{
+    transform: translateY(-20px);
+    font-size: 16px;
+    color: #1a237e;
+}
+
+.input input :focus,
+.input input:valid{
+    border-color: black;
+}
+
+
+.input-cont2{
+    width: 392px;
+    position: absolute;
+    bottom: 30%;
+}
+
+.input2{
+    width: 100%;
+    height: 40px;
+    position: relative;
+}
+
+.input2 input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid silver;
+    font-size: 18px;
+}
+
+.input2 label{
+    position: absolute;
+    left: 0%;
+    bottom: 10px;
+    color: silver;
+    font-size: 18px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input2 input :focus ~label,
+.input2 input:valid ~label{
+    transform: translateY(-20px);
+    font-size: 16px;
+    color: #1a237e;
+}
+
+.input2 input :focus,
+.input2 input:valid{
+    border-color: black;
+}
+
+.login{
+    position: absolute;
+    bottom: 20%;
+    width: 7%;
+    height: 7%;
+    border-radius: 10px;
+    box-shadow: 2px 2px rgba(0,0,0,1.2);
+    cursor: pointer;
+    background-color: white;
+    font-size: 15px;
+}
+
+.login :hover{
+    background: #1a237e;
+    transition: 1s;
+    color: white;
+}

@@ -1,0 +1,216 @@
+/*Header*/
+header{
+    text-align: center;
+    margin: 8px;
+}
+
+header h2{
+    font-weight: bolder;
+    font-size: 40px;
+}
+
+header h5{
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+MARQUEE{
+    border-bottom: 2px solid gray;
+    width: 60%;
+}
+
+
+
+/*Section*/
+
+/*Article 1*/
+hr{
+    width: 95%;
+}
+.article1{
+    margin: 30px;
+    text-align: center;
+    
+}
+.article1 p{
+    font-size: 16px;
+    margin: 6px;
+}
+
+.article1 h4{
+    margin: 6px;
+    font-weight: bolder;
+    font-size: 20px;
+}
+/*Article 2*/
+.article2{
+
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  
+}
+.article2 h4{
+    margin: 6px;
+    font-weight: bolder;
+    font-size: 20px;
+}
+.balones{
+   position: relative;
+   text-align: center;
+   margin: 5px;
+}
+
+.fut_icon{
+    position: absolute;
+    left: 5%;
+    border-radius: 11px;
+}
+
+
+.basquet_icon{
+    position: absolute;
+    right: 5%;
+    border-radius: 11px;
+}
+
+.voley_icon{
+    border-radius: 11px;
+}
+.text{
+    text-align: center;
+    position: relative;
+}
+.text h5{
+    display: inline-block;
+    
+}
+
+.f{
+    position: absolute;
+    left: 12.5%;
+}
+
+.b{
+    position: absolute;
+    right: 10%;
+}
+
+
+.butons_ligas{
+    text-align: center;
+    position: relative;
+    padding: 10px;
+}
+
+.btn_fut{
+   position: absolute;
+   left: 15%;
+   padding: 55px;
+   border-radius: 8px;
+}
+
+.btn_bas{
+    padding: 60px;
+    border-radius: 8px;
+}
+
+.btn_vo{
+    position: absolute;
+    right: 15%;
+    padding: 55px;
+    border-radius: 8px;
+}
+/*Article 3*/
+
+/*Footer*/
+footer{
+    background-color: #1a237e;
+    color: white;
+    height: 10vh;
+    width: 100%;
+    position: relative;
+}
+
+footer h6{
+    font-size: 16px;
+}
+.contact{
+    float: right;
+    margin: 5px;
+}
+
+.face{
+    margin: 3px;
+}
+
+.email{
+    margin: 3px;
+}
+
+.contact2{
+    position: relative;
+    margin: 30px;
+}
+.contact2 h6{
+    display: inline-block;
+   
+}
+
+.debe{
+    position: absolute;
+    right: 1%;
+    bottom: -2%;
+    font-size: 12px;
+}
+
+.derechos{
+    margin: 6px;
+    float: left;
+}
+
+.help{
+    text-decoration: none;
+    color: white;
+    font-size: 17px;
+    margin: 6px;
+    
+}
+
+
+.slider{
+    width: 100%;
+    height: 572px;
+    overflow: hidden;
+  }
+  .slider ul{
+      display: flex;
+      animation: cambio 15s infinite alternate linear;
+      width: 400%;
+  }
+  .slider li{
+      width: 100%;
+      list-style: none;
+  }
+  .slider img{
+      width: 100%;
+      height: 59%;
+  }
+  @keyframes cambio{
+      0%{margin-left: 0;}
+      20%{margin-left: 0;}
+      
+      25%{margin-left: -100%;}
+      45%{margin-left: -100%;}
+      
+      50%{margin-left: -200%;}
+      70%{margin-left: -200%;}
+      
+      75%{margin-left: -300%;}
+      100%{margin-left: -300%;}
+  }
+  @media screen and (min-width:320px) and (max-width:768px){
+  .slider, .slider ul, .slider img{
+      height: 100vh;
+  }
+  }
