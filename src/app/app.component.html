@@ -2,16 +2,29 @@
   <nav class="indigo darken-3">
     <div class="nav-wrapper">
       <a routerLink="/" class="brand-logo">
-        <img class="logo" src="../assets/imagenes/LOGO_icon.png" alt="65px" width="65px">
+        <img
+          class="logo"
+          src="../assets/imagenes/LOGO_icon.png"
+          alt="65px"
+          width="65px"
+        />
       </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="sass.html">Facebook</a></li>
         <li><a routerLink="/login" *ngIf="!isAuth">Iniciar sesion</a></li>
-        <li><a routerLink="/ADMIN" *ngIf="isAuth"><i class="fa-solid fa-user-shield"></i>Admin</a></li>
-        <li><a (click)="cerrarSesion()" *ngIf="isAuth"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+        <li>
+          <a routerLink="/ADMIN" *ngIf="isAuth"
+            ><i class="fa-solid fa-user-shield"></i>Admin</a
+          >
+        </li>
+        <li>
+          <a (click)="cerrarSesion()" *ngIf="isAuth"
+            ><i class="fa-solid fa-arrow-right-from-bracket"></i
+          ></a>
+        </li>
       </ul>
     </div>
   </nav>
-  
+
   <router-outlet></router-outlet>
 </div>
